@@ -1,0 +1,35 @@
+const moment = require (moment);
+const { Given, When, Then } = require("@wdio/cucumber-framework");
+const { expect } = require("chai");
+const moment = require("moment/moment");
+const { and } = require("wdio-wait-for");
+const Homepage = require('../../Pages/Facebook/Homepage');
+const SignupPage = require('../Pages/Facebook/SignupPage');
+
+const signuppage = new SignupPage();
+const homepage = new Homepage();
+
+
+Given(/^I am on facebook homepage$/, async function () {
+    await browser.url('/');
+    and(/^I click on Create New Account button$/, async function() {
+    await homepage.clickLoginButton();
+    })
+});
+
+
+Then(/^I verify current month is selected in month dropdown$/, async function () {
+    const isCurrentMonthSelected = await SignupPage.CurrentMonthValue()=== moment().format('MMM');
+    expect(isCurrentMonthSelected, 'Current Month NOT Selected').to.be.true;
+
+
+    and(/^I verify current date is selected in date dropdown$/, async function () {
+        const isCurrentDateSelected = await SignupPage.CurrentDateValue()=== moment().format('D');
+        expect(isCurrentDateSelected, 'Current Date NOT Selected').to.be.true;
+})
+and(/^I verify current date is selected in year dropdown$/, async function () {
+    const isCurrentYearSelected = await SignupPage.CurrentYearValue()=== moment().format('YYYY');
+    expect(isCurrentYearSelected, 'Current Year NOT Selected').to.be.true;
+})
+
+});
