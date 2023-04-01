@@ -1,7 +1,8 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect } = require("chai");
-const Homepage = require('../Pages/Facebook/Homepage');
-const SignupPage = require('../Pages/Facebook/SignupPage');
+const moment = require("moment");
+const Homepage = require('../../Pages/Facebook/Homepage');
+const SignupPage = require('../../Pages/Facebook/SignupPage');
 
 const homepage = new Homepage();
 const signuppage = new SignupPage();
@@ -43,7 +44,7 @@ Given(/^I click on Create New Account button$/, async function() {
 //     await signuppage.selectBirthDate(bDate);
 // });
 
-When(/^I enter "(.+)" as (.+)$/, async function(data, field) {
+When(/^I (enter|select) "(.+)" as (Firstname|Lastname|phone number|New password|birthdate)$/, async function(action, data, field) {
     switch (field) {
         case 'Firstname':
             await signuppage.enterFirstName(data);
@@ -66,14 +67,57 @@ When(/^I enter "(.+)" as (.+)$/, async function(data, field) {
 });
 
 
-
-
 When(/^I click "Sign Up" button$/, async function() {
     await signuppage.clickSignUpBtn();
 });
 
 Then(/^I verify gender error is displayed$/, async function () {
-    await browser.pause(20000);
     const isErrDisplayed = await signuppage.isGenderErrorDisplayed();
     expect(isErrDisplayed, 'Gender error is NOT displayed').to.be.true;
+});
+
+Then(/^I verify (.+) field is empty$/, async function (fieldName) {
+    let isFieldEnabled = false;
+    switch (fieldName) {
+        case 'firstname':
+            isFieldEnabled = await signuppage.isFirstNameEmpty();
+            break;
+        case 'lastname':
+            isFieldEnabled = await signuppage.isLastNameEmpty();
+            break;
+        case 'phone number':
+            isFieldEnabled = await signuppage.isMobileOrEmailEmpty();
+            break;
+        case 'new password':
+            isFieldEnabled = await signuppage.isNewPasswordEmpty();
+            break;
+        default:
+            break;
+    }
+    expect (isFieldEnabled, `"${fieldName}" field is NOT empty`).to.be.true;
+});
+
+Then(/^I verify current date is selected$/, async function () {
+    const currentTimestamp = moment();
+    
+    const selectedMonth = await signuppage.getSelectedMonth();
+    expect(selectedMonth, 'Current month is not selected').to.equal(currentTimestamp.format('MMM'));
+
+    const selectedDay = await signuppage.getSelectedDay();
+    expect(selectedDay, 'Current day is not selected').to.equal(currentTimestamp.format('D'));
+
+    const selectedYear = await signuppage.getSelectedYear();
+    expect(selectedYear, 'Current year is not selected').to.equal(currentTimestamp.format('yyyy'));
+
+});
+
+Then(/^I verify no gender is selected$/, async function () {
+    const isFemaleGenderSelected = await signuppage.isFemaleGenderSelected();
+    expect(isFemaleGenderSelected, 'Female gender is selected').to.be.false;
+
+    const isMaleGenderSelected = await signuppage.isMaleGenderSelected();
+    expect(isMaleGenderSelected, 'Male gender is selected').to.be.false;
+
+    const isCustomGenderSelected = await signuppage.isCustomGenderSelected();
+    expect(isCustomGenderSelected, 'Custom gender is selected').to.be.false;
 });

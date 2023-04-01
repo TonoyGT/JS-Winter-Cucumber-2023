@@ -7,9 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "wdio": "wdio run ./wdio.conf.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharmadeepak8616/Js-Winter-Cucumber-2023.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharmadeepak8616/Js-Winter-Cucumber-2023/issues"
+  },
+  "homepage": "https://github.com/sharmadeepak8616/Js-Winter-Cucumber-2023#readme",
   "dependencies": {
     "@wdio/cli": "^8.6.7",
     "chai": "^4.3.7",
@@ -17,8 +25,11 @@
   },
   "devDependencies": {
     "@wdio/allure-reporter": "^8.6.6",
+    "@wdio/browserstack-service": "^8.6.9",
     "@wdio/cucumber-framework": "^8.6.6",
+    "@wdio/firefox-profile-service": "^8.6.8",
     "@wdio/local-runner": "^8.6.7",
+    "@wdio/selenium-standalone-service": "^8.6.8",
     "chromedriver": "^111.0.0",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-wait-for": "^3.0.2"
