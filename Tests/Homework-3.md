@@ -16,4 +16,3 @@ Scenario: Verify current date is selected in sign up form
 
 --> Complete the automation in Cucumber framework and create pull request.
 --> Due date: Sat (Mar-25)
-
