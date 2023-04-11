@@ -157,6 +157,71 @@ BROWSER-STACK SET UP:
 
 
 
+JENKINS SET UP:
 
+    Jenkins Web Portal:
+        https://www.jenkins.io
+
+    Verify if Java is in the machine:
+        1. open terminal (Mac) or git bash (Windows)
+        2. execute command: java -version
+        3. If Java is not installed in machine, refer 
+            for mac:
+                https://medium.com/@kirebyte/using-homebrew-to-install-java-jdk11-on-macos-2021-4a90aa276f1c
+            for windows:
+                https://docs.oracle.com/goldengate/1212/gg-winux/GDRAD/java.htm#BGBFJHAB
+        4. Go to https://www.jenkins.io/
+        5. Tap on DOWNLOAD button
+        6. Tap on respective operating system
+        7. (for MAC) Open terminal, execute below commands :
+                brew install jenkins-lts
+                brew services start jenkins-lts
+            (for WINDOWS), 
+                Go to https://www.jenkins.io/download/
+                Click on Windows option
+                Follow steps from following screen
+        8. Open "https://localhost:8080" in chrome window
+        9.To Unlock Jenkins, perform below command in terminal/GitBash:
+            cat <filePath>
+        10. Submit password in the Jenkins-window
+        11. Create admin account
+        12. Set up Jenkins with Suggested Plugins
+
+Add NodeJS Plugin in the Jenkins
+    Go to Jenkins Home
+    Click on Manage Jenkins
+    Click on Plugin Manager (or Manage Plugin)
+    Click on Available Plugin
+    Search for NodeJS
+    Add plugin (Install without restart)
+
+    Go to Jenkins Home
+    Click on Manage Jenkins
+    Go to Global Tool Configuration
+    Scroll to NodeJS
+    Click "Add Node Js" button
+    Name NodeJs
+    Click "Apply" and "Save"
+    Configure Job with NodeJs (created in Global Tool Configuration) under Build Environment
+    --> Please Refer class recording for more details
+
+Add Allure Plugin in the Jenkins
+    Refer class recording using Manage Jenkins and Plugin Manager
+    Go to Jenkins Home
+    Click on Manage Jenkins
+    Click on Plugin Manager (or Manage Plugin)
+    Click on Available Plugin
+    Search for allure
+    Add plugin (Install without restart)
+
+    Go to Jenkins Home
+    Click on Manage Jenkins
+    Go to Global Tool Configuration
+    Scroll to "Allure Commandline"
+    Click "Add Allure Commandline" button
+    Name allure
+    Click "Apply" and "Save"
+    Configure Job with Allure (created in Global Tool Configuration) under Post-build Actions
+    --> Please Refer class recording for more details
 
         
