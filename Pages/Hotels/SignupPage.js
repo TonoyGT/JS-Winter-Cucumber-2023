@@ -4,7 +4,7 @@ class SignupPage {
 
     signinButtonLocator = '//button[text() = "Sign in"]';
     signupButtonLocator = '//a[text() = "Sign up, it’s free"]';
-    signinMenuLocator = '//div [@class="uitk-menu-container uitk-menu-open uitk-menu-pos-right uitk-menu-container-autoposition uitk-menu-container-has-intersection-root-el"]'
+    signinMenuLocator = '//div[contains(@class, "uitk-menu-container uitk")]'
 
     // locators of webElements on SignupPage
 
@@ -16,7 +16,7 @@ class SignupPage {
     lNameFieldLocator = '#signupFormLastNameInput';
     lNameErrorLocator = '#signupFormLastNameInput-error';
     passFieldLocator = '#signupFormPasswordInput';
-    keepMeSigninCheckboxLocator = '//div[@class="uitk-layout-flex uitk-layout-flex-flex-wrap-nowrap uitk-switch uitk-checkbox"]';
+    keepMeSigninCheckboxLocator = '//div[contains@class, " uitk-layout-flex-flex-wrap-nowrap uitk-"]';
     continueButtonLocator = '//button[text()="Continue"]';
     tcLocator = '//a[text() = "Terms and Conditions"]';
     lastRevisedDateLocator = '//span[text()="Last revised: 01/01/23"]';
@@ -24,6 +24,19 @@ class SignupPage {
 
 
     // functions to intercat with webElements on Homepage(SignIn)
+
+    async switchWindow() {
+
+        const allHandles = await browser.getWindowHandles();
+    for (const handle of allHandles) {
+        await browser.switchToWindow(handle);
+        const currentUrl = await browser.getUrl();
+        if (currentUrl.includes('signup?')) {
+            break;
+        }
+    }
+
+    }
 
     async clickSignInButton() {
         await $(this.signinButtonLocator).click();
@@ -102,7 +115,6 @@ class SignupPage {
     }
 
     async clickprivacyLink() {
-        //await $(this.tcLocator).waitForDisplayed();
         await $(this.privacyLinkLocator).click();
     }
 

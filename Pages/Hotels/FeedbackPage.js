@@ -17,7 +17,15 @@ thankyouFeedbackLocator= '//h5[text()="THANK YOU FOR YOUR FEEDBACK."]';
 // Functions
 
 async switchWindow() {
-    return await browser.getWindowHandles();
+
+    const allHandles = await browser.getWindowHandles();
+    for (const handle of allHandles) {
+        await browser.switchToWindow(handle);
+        const currentUrl = await browser.getUrl();
+        if (currentUrl.includes('directword')) {
+            break;
+        }
+    }
 }
 
 async waitForFeedbackDisplay() {
@@ -47,11 +55,11 @@ async selectStarRating() {
     await $(this.willYouReturnLocator).selectByIndex(2);   
 }
 
-async priorAnswer() {
+async clickOnPriorAnswer() {
     await $(this.priorAnsNOLocator).click();
  }
 
- async didYouAnswer() {
+ async clickOnDidYouAnswer() {
     await $(this.didYouAnsYesLocator).click();
  }
 

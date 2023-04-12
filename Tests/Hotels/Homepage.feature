@@ -2,28 +2,28 @@
 Feature: Homepage
 
   @TC-28
-  Scenario Outline: Verify Child-age dropdowns are same as number of Children selected
+  Scenario: Verify Child-age dropdowns are same as number of Children selected
     When I Lunch hotels.com homepage
-    Then I click on Travelers
-    Then I Select “Children” as 2
-    And I Verify Children-age dropdown are 2
-    Then I Verify Plus Button is enabled
+    And I click on Travelers
+    And I Select “Children” as 2
+    Then I Verify Children-age dropdown are 2
+    And I Verify Plus Button is enabled
     And I Verify Minus Button is enabled
-    Then I Select “Children” as 6
-    And I Verify Children-age dropdown are 6
-    Then I Verify Plus Button is disabled
+    When I Select “Children” as 6
+    Then I Verify Children-age dropdown are 6
+    And I Verify Plus Button is disabled
     And I Verify Minus Button is enabled
-    Then I Select “Children” as 5
-    And I Verify Children-age dropdown are 5
-    Then I Verify Plus Button is enabled
+    When I Select “Children” as 5
+    Then I Verify Children-age dropdown are 5
+    And I Verify Plus Button is enabled
     And I Verify Minus Button is enabled
-    Then I Select “Children” as 0
-    And I Verify Children-age dropdown is NOT displayed
-    Then I Verify Plus Button is enabled
+    When I Select “Children” as 0
+    Then I Verify Children-age dropdown is NOT displayed
+    And I Verify Plus Button is enabled
     And I Verify Minus Button is disabled
 
   @TC-18
-  Scenario Outline: Verify user can update number of guests on Home page
+  Scenario: Verify user can update number of guests on Home page
     When I Lunch hotels.com homepage
     Then I click on Travelers
     Then I Select “Adults as 6
@@ -35,7 +35,7 @@ Feature: Homepage
     Then I Verify total number of Travelers is sum of adults and children as same as selected on step #3 and #4
 
   @TC-24
-  Scenario Outline: Verify error is displayed when user submits the empty feedback form
+  Scenario: Verify error is displayed when user submits the empty feedback form
     When I Lunch hotels.com homepage
     Then I click on Sign In Button
     Then I Click “Feedback”
@@ -44,7 +44,7 @@ Feature: Homepage
     Then I Verify red-dotted line is displayed around star-section.
 
   @TC-25
-  Scenario Outline: Verify user can submit feedback after completing the feedback form
+  Scenario: Verify user can submit feedback after completing the feedback form
     When I Lunch hotels.com homepage
     Then I click on Sign In Button
     Then I Click “Feedback”
