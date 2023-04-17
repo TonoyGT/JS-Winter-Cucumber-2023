@@ -22,10 +22,15 @@ When(/^I Lunch hotels.com homepage$/, async function () {
     await browser.url('https://www.hotels.com/');
 });
 
-When(/^I click on Sign In Button$/, async function () {
+When(/^I Click on Sign In link$/, async function () {
+
+    await signuppage.clickSignInLink();
+    await signuppage.waitForSignInMenu();
+});
+
+When(/^I Click on Sign in button$/, async function () {
 
     await signuppage.clickSignInButton();
-    await signuppage.waitForSignInMenu();
 });
 
 When(/^I click on Sign Up Button$/, async function () {
@@ -52,6 +57,12 @@ When(/^I enter "(.+)" as Last Name$/, async function (data) {
 When(/^I enter "(.+)" as Password$/, async function (data) {
 
     await signuppage.enterPassword(data);
+});
+
+When(/^I Enter Invalid Email Address$/, async function () {
+
+    await signuppage.enterInvalidEmailInSignIn('@675!!');
+    await browser.pause(5000);
 });
 
 When(/^I verify Email Error Is Displayed$/, async function () {
@@ -117,7 +128,7 @@ When(/^I Verify Revised date Is In Correct Format$/, async function () {
     const cdate = (splitrdate[2]).toString();
     expectedDateFormat = 'MM/dd/yy';
     const isDateInExpectedformat = moment(cdate, expectedDateFormat).isValid();
-   
+
     expect(isDateInExpectedformat, 'Date Is NOT In Correct Format').to.be.true;
 
 });
@@ -138,15 +149,27 @@ When(/^I Verify "Privacy" Is Open in A New Tab$/, async function () {
 When(/^I Verify Updated date Is In Correct Format$/, async function () {
 
     await privacypage.switchWindow();
-    
+
     const updatedDate = await privacypage.currentDateRead();
     const splitrdate = updatedDate.split(' ');
-    const cdate = (splitrdate[2]+' '+splitrdate[3]+' '+splitrdate[4]);
+    const cdate = (splitrdate[2] + ' ' + splitrdate[3] + ' ' + splitrdate[4]);
     console.log(cdate);
     expectedDateFormat = 'DD MMMM, YYYY';
     const isDateInExpectedformat = moment(cdate, expectedDateFormat).isValid();
 
     expect(isDateInExpectedformat, 'Date Is NOT In Correct Format').to.be.true;
-    
+
+
+});
+
+When(/^I Click on Continue Button$/, async function () {
+
+    await signuppage.clickContinueButtonInSignIn();
+});
+
+When(/^I Verify Invalid error message is displayed$/, async function () {
+
+    const isInvalidEmailErrorDisplayed = await signuppage.isInvalidEmailErrorDisplayed();
+    expect(isInvalidEmailErrorDisplayed, 'Invalid Emaill Error NOT Displayed').to.be.true;
 
 });

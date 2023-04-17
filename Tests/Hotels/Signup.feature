@@ -4,7 +4,7 @@ Feature: Sign Up
   @TC-22
   Scenario Outline: Verify error message for invalid data in SignUp form
     When I Lunch hotels.com homepage
-    And I click on Sign In Button
+    And I click on Sign In Link
     And I click on Sign Up Button
     When I enter "<email>" as Email
     And I enter "<fName>" as First Name
@@ -25,7 +25,7 @@ Feature: Sign Up
   @TC-20
   Scenario: Verify TermsAndConditions link and PrivacyStatements link open correct page on new tab
     When I Lunch hotels.com homepage
-    And I click on Sign In Button
+    And I click on Sign In Link
     And I click on Sign Up Button
     When I Click on TC Link
     Then I Verify "Terms & Conditions" Is Open in A New Tab
