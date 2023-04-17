@@ -62,7 +62,6 @@ When(/^I enter "(.+)" as Password$/, async function (data) {
 When(/^I Enter Invalid Email Address$/, async function () {
 
     await signuppage.enterInvalidEmailInSignIn('@675!!');
-    await browser.pause(5000);
 });
 
 When(/^I verify Email Error Is Displayed$/, async function () {
