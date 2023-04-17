@@ -62,6 +62,15 @@ class Homepage {
     totalPersonLocator = '//input[@placeholder="Placeholder"]';
     roomMenuLocator = '//div[@class="uitk-menu-container uitk-menu-open uitk-menu-pos-right uitk-menu-container-autoposition uitk-menu-container-has-intersection-root-el uitk-menu-container-over-trigger"]';
 
+    // Other Elements Locators
+
+    englishLanguageLocator = '//div[text() = "English"]';
+    espanolLanguageLocator = '//div[text()= "Español"]';
+    languageSelectLocator = '//select[@id="language-selector"]';
+    saveButtonLocator = '//button[text()= "Save"]';
+    guardarButtonLocator = '//button[text()= "Guardar"]';
+    listYourPropertyLocator = '//a[@data-stid="listYourProperty-button"]';
+
     async isHotelsLogoDisplayed() {
         await $(this.#hotelsLogoLocator).waitForDisplayed();
         await $(this.#hotelsLogoLocator).isDisplayed();
@@ -271,6 +280,66 @@ class Homepage {
         return totalTravelers;
     }
 
+    
+
+    // Language change Functions
+
+    async clickOnEnglishLanguage() {
+        await $(this.englishLanguageLocator).click();
+    }
+
+    async clickOnEspanolLanguage() {
+        await $(this.espanolLanguageLocator).click();
+    }
+    
+    async chooseLanguage(data) {
+        await $(this.languageSelectLocator).selectByIndex(data);
+        
+    }
+
+    async chooseEnglishLanguage() {
+        await $(this.languageSelectLocator).click();
+       // await $(this.languageSelectLocator).selectByVisibleText('English (United States)');
+    }
+
+    async clickLanguageMenuSaveButton() {
+        await $(this.saveButtonLocator).click();
+    }
+
+    async clickLanguageMenuGuardarButton() {
+        await $(this.guardarButtonLocator).click();
+    }
+
+    async isEnglishDisplayed() {
+        const languageValue = await $(this.englishLanguageLocator).getText();
+        const result = (languageValue.localeCompare('English')===0);
+        return result;
+    }
+
+    async isEspanolDisplayed() {
+        const languageValue = await $(this.espanolLanguageLocator).getText();
+        const result = (languageValue.localeCompare('Español') === 0);
+        return result;
+    }
+
+    // Other Functions
+
+    async clickListYourProperty() {
+        await $(this.listYourPropertyLocator).click();
+    }
+    
+    async switchWindow() {
+
+        const allHandles = await browser.getWindowHandles();
+    for (const handle of allHandles) {
+        await browser.switchToWindow(handle);
+        const currentUrl = await browser.getUrl();
+        if (currentUrl.includes('?locale=en_US?')) {
+            break;
+        }
+    }
+
+    }
 
 
 }

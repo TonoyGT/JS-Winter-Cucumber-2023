@@ -37,7 +37,7 @@ Feature: Homepage
   @TC-24
   Scenario: Verify error is displayed when user submits the empty feedback form
     When I Lunch hotels.com homepage
-    Then I click on Sign In Button
+    Then I click on Sign In Link
     Then I Click “Feedback”
     Then I Click on Submit button
     Then I Verify error message is displayed (Please fill in the required information highlighted below.)
@@ -46,7 +46,7 @@ Feature: Homepage
   @TC-25
   Scenario: Verify user can submit feedback after completing the feedback form
     When I Lunch hotels.com homepage
-    Then I click on Sign In Button
+    Then I click on Sign In Link
     Then I Click “Feedback”
     Then I Select any star-rating
     Then I Enter any comments
