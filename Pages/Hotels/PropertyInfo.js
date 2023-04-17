@@ -19,7 +19,7 @@ class PropertyInfo {
     moveThePinTextLocator = '//span[contains(text(), "adjust the location")]';
 
 
-    // Functions
+    // Property Related Functions
 
 
     async switchWindow() {
